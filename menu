@@ -1,0 +1,320 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <allegro.h>
+#include "string.h"
+
+#define blanc makecol(255,255,255)
+#define marron makecol(120,67,21)
+
+int main()
+{
+    srand(time(NULL));
+
+    printf("->Initialisation d'Allegro en cours ...\n");
+    allegro_init();
+    printf("OK\n");
+
+    printf("->Initialisation couleur de fond en cours ...\n");
+    set_color_depth(desktop_color_depth());
+    printf("OK\n");
+
+    printf("->Initialisation du mode graphique en cours ...\n");
+    if((set_gfx_mode(GFX_AUTODETECT_WINDOWED,800,600,0,0))!=0)
+    {
+        allegro_message("Pb de mode graphique");
+        allegro_exit();
+        exit(EXIT_FAILURE);
+    }
+    printf("OK\n");
+
+    install_mouse();
+    show_mouse(screen);
+    install_keyboard();
+
+    BITMAP* fond;
+    fond=create_bitmap(800,600);
+
+    BITMAP* buffer;
+    buffer=create_bitmap(800,600);
+
+    BITMAP* image;
+    image=load_bitmap("fond.bmp", NULL);
+
+    BITMAP* lancement;
+    lancement=load_bitmap("fond.bmp", NULL);
+    BITMAP* regles;
+    regles=load_bitmap("fond.bmp", NULL);
+    BITMAP* options;
+    options=load_bitmap("fond.bmp", NULL);
+    BITMAP* conception;
+    conception=load_bitmap("fond.bmp", NULL);
+
+    /*******************************************************************************************************************/
+
+    mouse_x=5;
+    mouse_b=5;
+    while(!key[KEY_ESC])
+    {
+        menu(image,fond,buffer,lancement);
+    }
+
+    /*******************************************************************************************************************/
+    return 0;
+
+}END_OF_MAIN();
+
+
+
+
+
+/*******************************************************************************************************************************/
+int test1(BITMAP* lancement, BITMAP* regles, BITMAP* options, BITMAP* conception, BITMAP*  buffer, BITMAP* image, BITMAP* fond)
+{
+    int k=0;
+    while(!key[KEY_ESC])
+    {
+        while(k==0)
+        {
+            clear_bitmap(buffer);
+            clear_bitmap(screen);
+            blit(lancement,screen,0,0,0,0,800,600);
+            rectfill(buffer, 700, 570, 790, 590, blanc);
+            textprintf_centre(buffer, font, 70, 585, marron, "%s", "RETOUR MENU");
+            if(((mouse_y>=570)&&(mouse_y<=590))&&((mouse_x>=700)&&(mouse_x<=790)))
+            {
+                if(mouse_b & 1)
+                {
+                    menu(image, fond, buffer, lancement, regles, options, conception);
+                    k=1;
+                }
+            }
+            blit(buffer,screen,0,0,0,0,800,600);
+        }
+        return k;
+    }
+}
+/*******************************************************************************************************************************/
+int test2(BITMAP* lancement, BITMAP* regles, BITMAP* options, BITMAP* conception, BITMAP*  buffer, BITMAP* image, BITMAP* fond)
+{
+    int k=0;
+    while(!key[KEY_ESC])
+    {
+        while(k==0)
+        {
+            clear_bitmap(buffer);
+            clear_bitmap(screen);
+            blit(regles,screen,0,0,0,0,800,600);
+            rectfill(buffer, 700, 570, 790, 590, blanc);
+            textprintf_centre(buffer, font, 730, 585, marron, "%s", "RETOUR MENU");
+            if(((mouse_y>=570)&&(mouse_y<=590))&&((mouse_x>=700)&&(mouse_x<=790)))
+            {
+                if(mouse_b & 1)
+                {
+                    menu(image, fond, buffer, lancement, regles, options, conception);
+                    k=1;
+                }
+            }
+            blit(buffer,screen,0,0,0,0,800,600);
+        }
+        return k;
+    }
+}
+/*******************************************************************************************************************************/
+int test3(BITMAP* lancement, BITMAP* regles, BITMAP* options, BITMAP* conception, BITMAP*  buffer, BITMAP* image, BITMAP* fond)
+{
+    int k=0;
+    while(!key[KEY_ESC])
+    {
+        while(k==0)
+        {
+            clear_bitmap(buffer);
+            clear_bitmap(screen);
+            blit(options,screen,0,0,0,0,800,600);
+            rectfill(buffer, 700, 570, 790, 590, blanc);
+            textprintf_centre(buffer, font, 730, 585, marron, "%s", "RETOUR MENU");
+            if(((mouse_y>=570)&&(mouse_y<=590))&&((mouse_x>=700)&&(mouse_x<=790)))
+            {
+                if(mouse_b & 1)
+                {
+                    menu(image, fond, buffer, lancement, regles, options, conception);
+                    k=1;
+                }
+            }
+            blit(buffer,screen,0,0,0,0,800,600);
+        }
+        return k;
+    }
+}
+/*******************************************************************************************************************************/
+int test4(BITMAP* lancement, BITMAP* regles, BITMAP* options, BITMAP* conception, BITMAP*  buffer, BITMAP* image, BITMAP* fond)
+{
+    int k=0;
+    while(!key[KEY_ESC])
+    {
+        while(k==0)
+        {
+            clear_bitmap(buffer);
+            clear_bitmap(screen);
+            blit(conception,screen,0,0,0,0,800,600);
+            rectfill(buffer, 700, 570, 790, 590, blanc);
+            textprintf_centre(buffer, font, 730, 585, marron, "%s", "RETOUR MENU");
+            if(((mouse_y>=570)&&(mouse_y<=590))&&((mouse_x>=700)&&(mouse_x<=790)))
+            {
+                if(mouse_b & 1)
+                {
+                    menu(image, fond, buffer, lancement, regles, options, conception);
+                    k=1;
+                }
+            }
+            blit(buffer,screen,0,0,0,0,800,600);
+        }
+        return k;
+    }
+}
+/*******************************************************************************************************************************/
+void menu(BITMAP* image, BITMAP* fond, BITMAP* buffer, BITMAP* lancement, BITMAP* regles, BITMAP* options, BITMAP* conception)
+{
+    clear_bitmap(fond);
+    int a=0;
+
+    if(((mouse_x>=300)&&(mouse_x<=500))&&((mouse_y>=100)&&(mouse_y<=150)))
+    {
+        rectfill(fond,300,100,500,150,marron);
+        textprintf_centre(fond,font,400,120,blanc,"%s","LANCEMENT PARTIE");
+        blit(image,screen,0,0,0,0,800,600);
+        blit(fond,buffer,0,0,0,0,800,600);
+        if(mouse_b &1)
+        {
+            while(a!=1)
+            {
+                a=test1(lancement, regles, options, conception, buffer, image, fond);
+                if(a==1)
+                {
+                    clear_bitmap(fond);
+                    clear_bitmap(buffer);
+                    rect(screen,300,100,500,150,blanc);
+                    textprintf_centre(fond, font, 400,120,marron,"%s", "LANCEMENT PARTIE");
+                    rect(screen,300,200,500,250,blanc);
+                    textprintf_centre(fond, font, 400,220,marron,"%s", "REGLES");
+                    rect(screen,300,300,500,350,blanc);
+                    textprintf_centre(fond, font, 400,320,marron,"%s", "OPTIONS");
+                    rect(screen,300,400,500,450,blanc);
+                    textprintf_centre(fond, font, 400,420,marron,"%s", "CONCEPTION");
+                    blit(image,screen,0,0,0,0,800,600);
+                    blit(fond,buffer,0,0,0,0,800,600);
+                }
+            }
+        }
+    }
+    else
+    {
+        if(((mouse_x>=300)&&(mouse_x<=500))&&((mouse_y>=200)&&(mouse_y<=250)))
+        {
+            rectfill(fond,300,200,500,250,marron);
+            textprintf_centre(fond,font,400,220,blanc,"%s","REGLES");
+            blit(image,screen,0,0,0,0,800,600);
+            blit(fond,buffer,0,0,0,0,800,600);
+            if(mouse_b &1)
+            {
+                while(a!=1)
+                {
+                    a=test2(lancement, regles, options, conception, buffer, image, fond);
+                    if(a==1)
+                    {
+                        clear_bitmap(fond);
+                        clear_bitmap(buffer);
+                        rect(screen,300,100,500,150,blanc);
+                        textprintf_centre(fond, font, 400,120,marron,"%s", "LANCEMENT PARTIE");
+                        rect(screen,300,200,500,250,blanc);
+                        textprintf_centre(fond, font, 400,220,marron,"%s", "REGLES");
+                        rect(screen,300,300,500,350,blanc);
+                        textprintf_centre(fond, font, 400,320,marron,"%s", "OPTIONS");
+                        rect(screen,300,400,500,450,blanc);
+                        textprintf_centre(fond, font, 400,420,marron,"%s", "CONCEPTION");
+                        blit(image,screen,0,0,0,0,800,600);
+                        blit(fond,buffer,0,0,0,0,800,600);
+                    }
+                }
+            }
+        }
+        else
+        {
+            if(((mouse_x>=300)&&(mouse_x<=500))&&((mouse_y>=300)&&(mouse_y<=350)))
+            {
+                rectfill(fond,300,300,500,350,marron);
+                textprintf_centre(fond,font,400,320,blanc,"%s","OPTIONS");
+                blit(image,screen,0,0,0,0,800,600);
+                blit(fond,buffer,0,0,0,0,800,600);
+                if(mouse_b &1)
+                {
+                    while(a!=1)
+                    {
+                        a=test3(lancement, regles, options, conception, buffer, image, fond);
+                        if(a==1)
+                        {
+                            clear_bitmap(fond);
+                            clear_bitmap(buffer);
+                            rect(screen,300,100,500,150,blanc);
+                            textprintf_centre(fond, font, 400,120,marron,"%s", "LANCEMENT PARTIE");
+                            rect(screen,300,200,500,250,blanc);
+                            textprintf_centre(fond, font, 400,220,marron,"%s", "REGLES");
+                            rect(screen,300,300,500,350,blanc);
+                            textprintf_centre(fond, font, 400,320,marron,"%s", "OPTIONS");
+                            rect(screen,300,400,500,450,blanc);
+                            textprintf_centre(fond, font, 400,420,marron,"%s", "CONCEPTION");
+                            blit(image,screen,0,0,0,0,800,600);
+                            blit(fond,buffer,0,0,0,0,800,600);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if(((mouse_x>=300)&&(mouse_x<=500))&&((mouse_y>=400)&&(mouse_y<=450)))
+                {
+                    rectfill(fond,300,400,500,450,marron);
+                    textprintf_centre(fond,font,400,420,blanc,"%s","CONCEPTION");
+                    blit(image,screen,0,0,0,0,800,600);
+                    blit(fond,buffer,0,0,0,0,800,600);
+                    if(mouse_b &1)
+                    {
+                        while(a!=1)
+                        {
+                            a=test4(lancement, regles, options, conception, buffer, image, fond);
+                            if(a==1)
+                            {
+                                clear_bitmap(fond);
+                                clear_bitmap(buffer);
+                                rect(screen,300,100,500,150,blanc);
+                                textprintf_centre(fond, font, 400,120,marron,"%s", "LANCEMENT PARTIE");
+                                rect(screen,300,200,500,250,blanc);
+                                textprintf_centre(fond, font, 400,220,marron,"%s", "REGLES");
+                                rect(screen,300,300,500,350,blanc);
+                                textprintf_centre(fond, font, 400,320,marron,"%s", "OPTIONS");
+                                rect(screen,300,400,500,450,blanc);
+                                textprintf_centre(fond, font, 400,420,marron,"%s", "CONCEPTION");
+                                blit(image,screen,0,0,0,0,800,600);
+                                blit(fond,buffer,0,0,0,0,800,600);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    rect(screen,300,100,500,150,blanc);
+                    textprintf_centre(fond, font, 400,120,marron,"%s", "LANCEMENT PARTIE");
+                    rect(screen,300,200,500,250,blanc);
+                    textprintf_centre(fond, font, 400,220,marron,"%s", "REGLES");
+                    rect(screen,300,300,500,350,blanc);
+                    textprintf_centre(fond, font, 400,320,marron,"%s", "OPTIONS");
+                    rect(screen,300,400,500,450,blanc);
+                    textprintf_centre(fond, font, 400,420,marron,"%s", "CONCEPTION");
+                    blit(image,screen,0,0,0,0,800,600);
+                    blit(fond,buffer,0,0,0,0,800,600);
+                }
+            }
+        }
+    }
+    blit(buffer,screen,0,0,0,0,800,600);
+}
+/*******************************************************************************************************************************/

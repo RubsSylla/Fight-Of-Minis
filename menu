@@ -92,7 +92,7 @@ int test1(BITMAP* lancement, BITMAP* regles, BITMAP* options, BITMAP* conception
             clear(buffer);
             blit(lancement,buffer,0,0,0,0,800,600);
             rectfill(buffer, 700, 570, 790, 590, blanc);
-            textprintf(buffer, font, 700, 585, marron, "%s", "RETOUR MENU");
+            textprintf_ex(buffer, font, 700, 575, marron,-1, "%s", "RETOUR MENU");
             if(((mouse_y>=570)&&(mouse_y<=590))&&((mouse_x>=700)&&(mouse_x<=790)))
             {
                 if(mouse_b & 1)
@@ -117,7 +117,7 @@ int test2(BITMAP* lancement, BITMAP* regles, BITMAP* options, BITMAP* conception
             clear(buffer);
             blit(regles,buffer,0,0,0,0,800,600);
             rectfill(buffer, 700, 570, 790, 590, blanc);
-            textprintf(buffer, font, 730, 585, marron, "%s", "RETOUR MENU");
+            textprintf_ex(buffer, font, 700, 575, marron,-1, "%s", "RETOUR MENU");
             if(((mouse_y>=570)&&(mouse_y<=590))&&((mouse_x>=700)&&(mouse_x<=790)))
             {
                 if(mouse_b & 1)
@@ -142,7 +142,7 @@ int test3(BITMAP* lancement, BITMAP* regles, BITMAP* options, BITMAP* conception
             clear(buffer);
             blit(options,buffer,0,0,0,0,800,600);
             rectfill(buffer, 700, 570, 790, 590, blanc);
-            textprintf(buffer, font, 730, 585, marron, "%s", "RETOUR MENU");
+            textprintf_ex(buffer, font, 700, 575, marron,-1, "%s", "RETOUR MENU");
             if(((mouse_y>=570)&&(mouse_y<=590))&&((mouse_x>=700)&&(mouse_x<=790)))
             {
                 if(mouse_b & 1)
@@ -167,7 +167,7 @@ int test4(BITMAP* lancement, BITMAP* regles, BITMAP* options, BITMAP* conception
             clear(buffer);
             blit(conception,buffer,0,0,0,0,800,600);
             rectfill(buffer, 700, 570, 790, 590, blanc);
-            textprintf(buffer, font, 730, 585, marron, "%s", "RETOUR MENU");
+            textprintf_ex(buffer, font, 700, 575, marron,-1, "%s", "RETOUR MENU");
             if(((mouse_y>=570)&&(mouse_y<=590))&&((mouse_x>=700)&&(mouse_x<=790)))
             {
                 if(mouse_b & 1)
@@ -188,32 +188,37 @@ void menu(BITMAP* image, BITMAP* fond, BITMAP* buffer, BITMAP* lancement, BITMAP
 
     int a=0;
 
-    if(((mouse_x>=300)&&(mouse_x<=500))&&((mouse_y>=100)&&(mouse_y<=150)))
-    {
-        blit(image,buffer,0,0,0,0,800,600);
-
-        rectfill(buffer,300,100,500,150,marron);
-        textprintf_centre(buffer,font,400,120,blanc,"%s","LANCEMENT PARTIE");
-
-        if(mouse_b &1)
+        if(((mouse_x>=300)&&(mouse_x<=500))&&((mouse_y>=100)&&(mouse_y<=150)))
         {
-            while(a!=1)
-            {
-                a=test1(lancement, regles, options, conception, buffer, image, fond);
 
-                if(a==1)
+            blit(image,buffer,0,0,0,0,800,600);
+            affichageDeBase(fond, buffer);
+            rectfill(buffer,300,100,500,150,marron);
+            textprintf_centre_ex(buffer,font,400,120,blanc,-1,"%s","LANCEMENT PARTIE");
+
+            if(mouse_b &1)
+            {
+                while(a!=1)
                 {
-                    clear(buffer);
-                    affichageDeBase(fond, buffer);
+                    a=test1(lancement, regles, options, conception, buffer, image, fond);
+
+                    if(a==1)
+                    {
+                        clear(buffer);
+                        affichageDeBase(fond, buffer);
+                    }
                 }
             }
+            blit(buffer,screen,0,0,0,0,800,600);
+            rest(30);
         }
-        blit(buffer,screen,0,0,0,0,800,600);
-    }
         if(((mouse_x>=300)&&(mouse_x<=500))&&((mouse_y>=200)&&(mouse_y<=250)))
         {
+            blit(image,buffer,0,0,0,0,800,600);
+            affichageDeBase(fond, buffer);
             rectfill(buffer,300,200,500,250,marron);
-            textprintf_centre(buffer,font,400,220,blanc,"%s","REGLES");
+            textprintf_centre_ex(buffer,font,400,220,blanc,-1,"%s","REGLES");
+
             if(mouse_b &1)
             {
                 while(a!=1)
@@ -227,12 +232,15 @@ void menu(BITMAP* image, BITMAP* fond, BITMAP* buffer, BITMAP* lancement, BITMAP
                 }
             }
             blit(buffer,screen,0,0,0,0,800,600);
+            rest(30);
         }
-            if(((mouse_x>=300)&&(mouse_x<=500))&&((mouse_y>=300)&&(mouse_y<=350)))
+        if(((mouse_x>=300)&&(mouse_x<=500))&&((mouse_y>=300)&&(mouse_y<=350)))
             {
-                //clear_bitmap(fond);
+                blit(image,buffer,0,0,0,0,800,600);
+                affichageDeBase(fond, buffer);
                 rectfill(buffer,300,300,500,350,marron);
-                textprintf_centre(buffer,font,400,320,blanc,"%s","OPTIONS");
+                textprintf_centre_ex(buffer,font,400,320,blanc,-1,"%s","OPTIONS");
+
                 if(mouse_b &1)
                 {
                     while(a!=1)
@@ -246,12 +254,15 @@ void menu(BITMAP* image, BITMAP* fond, BITMAP* buffer, BITMAP* lancement, BITMAP
                     }
                 }
                 blit(buffer,screen,0,0,0,0,800,600);
+                rest(30);
             }
-            if(((mouse_x>=300)&&(mouse_x<=500))&&((mouse_y>=400)&&(mouse_y<=450)))
-                {
-                    //clear_bitmap(fond);
+        if(((mouse_x>=300)&&(mouse_x<=500))&&((mouse_y>=400)&&(mouse_y<=450)))
+            {
+                    blit(image,buffer,0,0,0,0,800,600);
+                    affichageDeBase(fond, buffer);
                     rectfill(buffer,300,400,500,450,marron);
-                    textprintf_centre(buffer,font,400,420,blanc,"%s","CONCEPTION");
+                    textprintf_centre_ex(buffer,font,400,420,blanc,-1,"%s","CONCEPTION");
+
                     if(mouse_b &1)
                     {
                         while(a!=1)
@@ -264,11 +275,10 @@ void menu(BITMAP* image, BITMAP* fond, BITMAP* buffer, BITMAP* lancement, BITMAP
                             }
                         }
                     }
-                    blit(buffer,screen,0,0,0,0,800,600);
-                }
+                blit(buffer,screen,0,0,0,0,800,600);
+            }
         else
             {
-                blit(image,buffer,0,0,0,0,800,600);
                 affichageDeBase(fond, buffer);
                 blit(buffer,screen,0,0,0,0,800,600);
             }
@@ -279,12 +289,12 @@ void affichageDeBase(BITMAP* fond, BITMAP* buffer)
 {
 
     rect(buffer,300,100,500,150,blanc);
-    textprintf_centre_ex(buffer, font, 400,120,marron,blanc,"%s", "LANCEMENT PARTIE");
+    textprintf_centre_ex(buffer, font, 400,120,marron,-1,"%s", "LANCEMENT PARTIE");
     rect(buffer,300,200,500,250,blanc);
-    textprintf_centre_ex(buffer, font, 400,220,marron,blanc,"%s", "REGLES");
+    textprintf_centre_ex(buffer, font, 400,220,marron,-1,"%s", "REGLES");
     rect(buffer,300,300,500,350,blanc);
-    textprintf_centre_ex(buffer, font, 400,320,marron,blanc,"%s", "OPTIONS");
+    textprintf_centre_ex(buffer, font, 400,320,marron,-1,"%s", "OPTIONS");
     rect(buffer,300,400,500,450,blanc);
-    textprintf_centre_ex(buffer, font, 400,420,marron,blanc,"%s", "CONCEPTION");
+    textprintf_centre_ex(buffer, font, 400,420,marron,-1,"%s", "CONCEPTION");
 
 }

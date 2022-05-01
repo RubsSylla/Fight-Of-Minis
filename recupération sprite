@@ -1,0 +1,13 @@
+BITMAP* recup_sprite(BITMAP* source, int w, int h, int startx, int starty, int colonnes, int element)
+{
+    BITMAP* tempo;
+    int x,y;
+    tempo=create_bitmap(w,h);
+    if(tempo!=NULL)
+    {
+        x = startx + (element%colonnes)*w;
+        y = starty + (element/colonnes)*h;
+        blit(source,tempo,x,y,0,0,w,h);
+    }
+    return tempo;
+}

@@ -8,7 +8,7 @@ void lancementPartie(BITMAP* lancement, BITMAP* regles, BITMAP* options, BITMAP*
     int saisie=0;
 
     char *nomsJoueurs;
-    char tmp[20];
+    char tmp;
 
     clear(buffer);
     blit(lancement,buffer,0,0,0,0,800,600);
@@ -94,13 +94,12 @@ void lancementPartie(BITMAP* lancement, BITMAP* regles, BITMAP* options, BITMAP*
             {
                 printf("saisir le nom du %d e joueur : ", i+1);
                 fflush(stdin);
-                scanf("%s", &tmp);
-                nomsJoueurs[i]=tmp;
+                scanf("%s", &nomsJoueurs[i]);
             }
             printf("\nLES NOMS DES JOUEURS SONT :\n");
             for(int j=0 ; j<N ; j++)
             {
-                printf("- %s\n", nomsJoueurs[j]);
+                printf("- %c\n", nomsJoueurs[j]);
 
             }
             printf("\n----------NOMS DES JOUEURS ENREGISTRES----------\n");

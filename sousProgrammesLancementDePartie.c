@@ -8,7 +8,6 @@ void lancementPartie(BITMAP* lancement, BITMAP* regles, BITMAP* options, BITMAP*
     int saisie=0;
 
     char *nomsJoueurs;
-    char tmp;
 
     clear(buffer);
     blit(lancement,buffer,0,0,0,0,800,600);
@@ -123,8 +122,6 @@ void lancementPartie(BITMAP* lancement, BITMAP* regles, BITMAP* options, BITMAP*
                     blit(buffer,screen,0,0,0,0,800,600);
                     if(mouse_b &1)
                     {
-                        clear_bitmap(screen);
-                        clear_bitmap(buffer);
                         blit(pageJeu,screen,0,0,0,0,800,600);
                         rest(1000);
                         a=1;
@@ -150,6 +147,8 @@ int test1(BITMAP* lancement, BITMAP* regles, BITMAP* options, BITMAP* conception
     {
         if(mouse_b & 1)
         {
+            clear_bitmap(buffer);
+            clear_bitmap(screen);
             menu(image, fond, buffer, lancement, regles, options, conception,pageJeu);
             k=1;
         }
@@ -195,6 +194,7 @@ int test3(BITMAP* lancement, BITMAP* regles, BITMAP* options, BITMAP* conception
             if(mouse_b & 1)
             {
                 menu(image, fond, buffer, lancement, regles, options, conception,pageJeu);
+
                 k=1;
             }
         }

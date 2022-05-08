@@ -55,17 +55,10 @@ int main()
 
     while(!key[KEY_ESC])
     {
-        clear(buffer);
-
-        blit(image,buffer,0,0,0,0,800,600);
-
         menu(image,fond,buffer,lancement,regles,options,conception,pageJeu);
-
-        blit(buffer,screen,0,0,0,0,800,600);
     }
 
     /*******************************************************************************************************************/
     return 0;
 
 }END_OF_MAIN();
-

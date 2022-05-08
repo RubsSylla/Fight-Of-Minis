@@ -8,6 +8,9 @@ void menu(BITMAP* image, BITMAP* fond, BITMAP* buffer, BITMAP* lancement, BITMAP
     int b=0, c=0, d=0;
     int constanteDebutDeJeu=0;
 
+    clear(buffer);
+    blit(image,buffer,0,0,0,0,800,600);
+
     while(constanteDebutDeJeu==0)
     {
         if(((mouse_x>=450)&&(mouse_x<=650))&&((mouse_y>=100)&&(mouse_y<=150)))
